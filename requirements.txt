@@ -1,0 +1,10 @@
+pandas>=2.0
+numpy
+scipy
+statsmodels>=0.14
+scikit-learn>=1.3
+plotly>=5.18
+ipywidgets>=7
+jupyterlab
+jinja2
+matplotlib
