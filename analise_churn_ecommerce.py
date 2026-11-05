@@ -25,7 +25,7 @@
 #
 # 1. **Auditoria.** Faltantes, valores impossíveis, consistência das categorias e sinais de geração sintética.
 # 2. **Limpeza documentada.** Cada regra explicada, com o efeito antes e depois.
-# 3. **Correlações entre pares.** As 190 combinações de variáveis numéricas: Pearson × Spearman (o efeito dos outliers), significância estatística × relevância prática, clusters, fator comum (PCA) e correlação parcial.
+# 3. **Correlações entre pares.** As 190 combinações de variáveis numéricas: Pearson × Spearman (o efeito dos outliers), tamanho do efeito, clusters, fator comum (PCA) e correlação parcial.
 # 4. **Fatores de churn.** Taxa de cancelamento por faixa de cada variável, regressão logística, modelo de árvores (gradient boosting), importância por permutação e efeitos de limiar.
 # 5. **Painel interativo.** Explorador de variável, comparador de pares, segmentação e simulador de risco de churn.
 #
@@ -724,8 +724,8 @@ md(f"""
 
 6. Os sinais mais fortes são de atrito: no quintil mais alto de abandono de carrinho o churn é {q_cart.iloc[-1]:.0%}, contra {q_cart.iloc[0]:.0%} no mais baixo; em ligações ao atendimento, {q_call.iloc[-1]:.0%} contra {q_call.iloc[0]:.0%}.
 7. O gradient boosting (AUC {auc_cv_gb.mean():.2f}) supera a regressão logística (AUC {auc_cv_lr.mean():.2f}): os efeitos têm limiares e curvas. O caso mais claro é o LTV, com churn em U ({q_ltv.iloc[0]:.0%} no quintil baixo, {q_ltv.min():.0%} no meio, {q_ltv.iloc[-1]:.0%} no alto), invisível para a correlação e a variável mais importante do modelo de árvores.
-7b. A dependência parcial mostra degraus nítidos (ligações: {DEGRAUS['Customer_Service_Calls'][2]:.0%} → {DEGRAUS['Customer_Service_Calls'][3]:.0%} entre {DEGRAUS['Customer_Service_Calls'][0]:g} e {DEGRAUS['Customer_Service_Calls'][1]:g} ligações), compatíveis com regras de corte usadas pelo gerador da base.
-8. Na logística, o LTV inverte de sinal ao entrar junto com o total de compras (efeito de supressão): um coeficiente de regressão não é uma correlação.
+8. A dependência parcial mostra degraus nítidos (ligações: {DEGRAUS['Customer_Service_Calls'][2]:.0%} → {DEGRAUS['Customer_Service_Calls'][3]:.0%} entre {DEGRAUS['Customer_Service_Calls'][0]:g} e {DEGRAUS['Customer_Service_Calls'][1]:g} ligações), compatíveis com regras de corte usadas pelo gerador da base.
+9. Na logística, o LTV inverte de sinal ao entrar junto com o total de compras (efeito de supressão): um coeficiente de regressão não é uma correlação.
 
 **Limitações:** base simulada; corte transversal sem datas (não há como estudar a ordem temporal entre engajamento e cancelamento); associações não implicam causalidade.
 """)
