@@ -5,7 +5,7 @@
 
 **Autor:** João Gabriel Tavares Silva · Universidade de Brasília (UnB) · Matrícula 221021071
 
-Análise de uma base pública do Kaggle com 50.000 clientes de e-commerce (25 variáveis de perfil, engajamento, compras e atrito) e a indicação de cancelamento (churn, 28,9% dos clientes).
+Análise do [*Ecommerce Customer Behavior Dataset*](https://www.kaggle.com/datasets/srisyra02/ecommerce-customer-behavior-dataset) (Kaggle), com 50.000 clientes de e-commerce (25 variáveis de perfil, engajamento, compras e atrito) e a indicação de cancelamento (churn, 28,9% dos clientes).
 
 > **A base é simulada.** O notebook documenta as evidências (faltantes em proporções redondas exatas, geografia e cadastro perfeitamente equilibrados, erros inseridos, correlações "tudo ou nada", efeitos em degrau). Os resultados valem como estudo de método.
 

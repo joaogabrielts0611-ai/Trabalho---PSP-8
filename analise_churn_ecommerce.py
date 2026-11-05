@@ -17,7 +17,7 @@
 #
 # [![Abrir no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/joaogabrielts0611-ai/analise-churn-ecommerce/blob/main/analise_churn_ecommerce.ipynb)
 #
-# **Base:** arquivo `eCommerce-dataset.csv`, base pública do Kaggle sobre comportamento de clientes de e-commerce: 50.000 clientes de uma loja on-line em 8 países, 25 variáveis de perfil, engajamento, compras e atrito, e a indicação de cancelamento (`Churned`).
+# **Base:** [*Ecommerce Customer Behavior Dataset*](https://www.kaggle.com/datasets/srisyra02/ecommerce-customer-behavior-dataset) (Kaggle, usuário srisyra02), arquivo `eCommerce-dataset.csv`: 50.000 clientes de uma loja on-line em 8 países, 25 variáveis de perfil, engajamento, compras e atrito, e a indicação de cancelamento (`Churned`).
 #
 # > **Atenção: a base é simulada.** A Seção 1 mostra as evidências: faltantes em proporções redondas exatas, cidades e trimestres distribuídos de forma perfeita, valores impossíveis inseridos de propósito. As conclusões valem para esta base e para o método, não como retrato do comportamento real de consumidores.
 #
@@ -732,7 +732,7 @@ md(f"""
 
 # %% [markdown]
 # ## Referências
-# * Kaggle. Base `eCommerce-dataset.csv` (comportamento e churn de clientes de e-commerce). Disponível em: https://www.kaggle.com
+# * SRISYRA02. *Ecommerce Customer Behavior Dataset*. Kaggle, [2026?]. Disponível em: https://www.kaggle.com/datasets/srisyra02/ecommerce-customer-behavior-dataset
 # * Benjamini, Y.; Hochberg, Y. (1995). Controlling the false discovery rate. *Journal of the Royal Statistical Society B*, 57(1), 289–300.
 # * Cramér, H. (1946). *Mathematical Methods of Statistics*. Princeton University Press.
 # * Friedman, J. H. (2001). Greedy function approximation: a gradient boosting machine. *Annals of Statistics*, 29(5), 1189–1232.
