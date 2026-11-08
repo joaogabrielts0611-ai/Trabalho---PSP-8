@@ -15,7 +15,7 @@
 #
 # **Autor:** João Gabriel Tavares Silva · Universidade de Brasília (UnB) · Matrícula 221021071
 #
-# [![Abrir no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/joaogabrielts0611-ai/analise-churn-ecommerce/blob/main/analise_churn_ecommerce.ipynb)
+# [![Abrir no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/joaogabrielts0611-ai/Trabalho---PSP-8/blob/main/analise_churn_ecommerce.ipynb)
 #
 # **Base:** [*Ecommerce Customer Behavior Dataset*](https://www.kaggle.com/datasets/srisyra02/ecommerce-customer-behavior-dataset) (Kaggle, usuário srisyra02), arquivo `eCommerce-dataset.csv`: 50.000 clientes de uma loja on-line em 8 países, 25 variáveis de perfil, engajamento, compras e atrito, e a indicação de cancelamento (`Churned`).
 #
@@ -92,7 +92,7 @@ print("Ambiente:", "Google Colab" if IN_COLAB else "Jupyter local", "| pandas", 
 # ### 0.1 Carga dos dados
 
 # %%
-REPO_RAW = "https://raw.githubusercontent.com/joaogabrielts0611-ai/analise-churn-ecommerce/main/data/"
+REPO_RAW = "https://raw.githubusercontent.com/joaogabrielts0611-ai/Trabalho---PSP-8/main/data/"
 ARQ = "eCommerce-dataset.csv"
 bruto = pd.read_csv(os.path.join("data", ARQ) if os.path.exists(os.path.join("data", ARQ)) else REPO_RAW + ARQ)
 print(f"{bruto.shape[0]:,} clientes × {bruto.shape[1]} variáveis".replace(",", "."))
