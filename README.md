@@ -49,3 +49,11 @@ requirements.txt
 pip install -r requirements.txt
 jupyter lab analise_churn_ecommerce.ipynb
 ```
+
+## Short paper (LaTeX / Overleaf)
+
+O short paper em ABNT (classe abnTeX2) está na pasta `shortpaper/`: `main.tex`, `referencias.bib`, figuras e o PDF compilado (`shortpaper.pdf`).
+
+[![Abrir no Overleaf](https://img.shields.io/badge/abrir%20no-Overleaf-47A141)](https://www.overleaf.com/docs?snip_uri=https://raw.githubusercontent.com/joaogabrielts0611-ai/analise-churn-ecommerce/main/shortpaper-overleaf.zip)
+
+O botão acima cria uma cópia do projeto na conta Overleaf de quem clicar. Compilador: pdfLaTeX (padrão).
