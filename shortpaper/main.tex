@@ -72,20 +72,20 @@
 
 % ---------- Cabeçalho com logo da UnB ----------
 \begin{center}
-  \includegraphics[width=3cm]{logo-unb}\\[0.6cm]
+  \includegraphics[width=2.6cm]{logo-unb}\\[0.4cm]
   {\large\bfseries Churn em e-commerce: auditoria de dados, correlações entre fatores e modelos de cancelamento\par}
-  \vspace{0.6cm}
-  {\normalsize João Gabriel Tavares Silva\footnote{Aluno da Universidade de Brasília (UnB). Matrícula: 221021071.}\par}
-  {\small Universidade de Brasília (UnB)\par}
+  \vspace{0.4cm}
+  {\normalsize João Gabriel Tavares Silva\par}
+  {\small Universidade de Brasília (UnB) $\cdot$ Matrícula: 221021071\par}
 \end{center}
-\vspace{0.4cm}
+\vspace{0.2cm}
 
 % ---------- Resumo ----------
 \begin{resumoumacoluna}
   \SingleSpacing
-  Este trabalho analisa uma base pública de 50.000 clientes de comércio eletrônico, com 25 variáveis de perfil, engajamento, compras e atrito, para identificar fatores associados ao cancelamento (\textit{churn}), que atinge 28,9\% dos clientes. A auditoria mostrou que a base é simulada: dados faltantes em proporções redondas exatas, geografia e cadastro distribuídos de forma perfeita e 451 clientes com valores impossíveis inseridos. Os resultados valem, portanto, como estudo de método. Valores extremos distorcem a correlação de Pearson (ticket médio $\times$ valor do cliente: 0,15 em Pearson, 0,56 em Spearman). Um único fator de engajamento explica 36,5\% da variância das 20 variáveis numéricas, e, controlado esse fator, as oito medidas de engajamento perdem quase toda a correlação com o churn. Os sinais mais fortes são de atrito: o churn vai de 12\% a 47\% entre o quintil mais baixo e o mais alto de ligações ao atendimento. Um modelo de \textit{gradient boosting} (AUC = 0,93) supera a regressão logística (AUC = 0,79) porque capta relações não lineares, como o churn em forma de U ao longo do valor do cliente.
+  Este trabalho analisa uma base pública de 50.000 clientes de comércio eletrônico, com 25 variáveis de perfil, engajamento, compras e atrito, para identificar fatores associados ao cancelamento (\textit{churn}), que atinge 28,9\% dos clientes. A auditoria mostrou que a base é simulada, e os resultados valem como estudo de método. Valores extremos distorcem a correlação de Pearson (ticket médio $\times$ valor do cliente: 0,15 em Pearson, 0,56 em Spearman). Um único fator de engajamento explica 36,5\% da variância das 20 variáveis numéricas e, controlado esse fator, as oito medidas de engajamento perdem quase toda a correlação com o churn. Os sinais mais fortes são de atrito: o churn vai de 12\% a 47\% entre o quintil mais baixo e o mais alto de ligações ao atendimento. Um modelo de \textit{gradient boosting} (AUC = 0,93) supera a regressão logística (AUC = 0,79) porque capta efeitos não lineares.
 
-  \vspace{\onelineskip}
+  \vspace{0.5\onelineskip}
   \noindent
   \textbf{Palavras-chave}: churn; comércio eletrônico; qualidade de dados; correlação; gradient boosting.
 \end{resumoumacoluna}
@@ -94,9 +94,9 @@
 \begin{resumoumacoluna}
   \SingleSpacing
   \begin{otherlanguage*}{english}
-    This paper analyzes a public dataset of 50,000 e-commerce customers, with 25 profile, engagement, purchase and friction variables, to identify factors associated with churn, which affects 28.9\% of customers. The audit showed that the dataset is simulated: missing values in exact round proportions, perfectly balanced geography and sign-up dates, and 451 customers with injected impossible values. The results therefore stand as a methodological study. Extreme values distort Pearson correlation (average order value $\times$ customer value: 0.15 in Pearson, 0.56 in Spearman). A single engagement factor explains 36.5\% of the variance of the 20 numeric variables, and, once it is controlled for, the eight engagement measures lose almost all their correlation with churn. The strongest signals relate to friction: churn rises from 12\% to 47\% between the lowest and highest quintile of customer service calls. A gradient boosting model (AUC = 0.93) outperforms logistic regression (AUC = 0.79) because it captures non-linear relationships, such as the U-shaped churn along customer lifetime value.
+    This paper analyzes a public dataset of 50,000 e-commerce customers, with 25 profile, engagement, purchase and friction variables, to identify factors associated with churn, which affects 28.9\% of customers. The audit showed that the dataset is simulated, so the results stand as a methodological study. Extreme values distort Pearson correlation (average order value $\times$ customer value: 0.15 in Pearson, 0.56 in Spearman). A single engagement factor explains 36.5\% of the variance of the 20 numeric variables and, once it is controlled for, the eight engagement measures lose almost all their correlation with churn. The strongest signals relate to friction: churn rises from 12\% to 47\% between the lowest and highest quintile of customer service calls. A gradient boosting model (AUC = 0.93) outperforms logistic regression (AUC = 0.79) because it captures non-linear effects.
 
-    \vspace{\onelineskip}
+    \vspace{0.5\onelineskip}
     \noindent
     \textbf{Keywords}: churn; e-commerce; data quality; correlation; gradient boosting.
   \end{otherlanguage*}
@@ -107,85 +107,42 @@
 % =====================================================================
 \section{Introdução}
 
-Reter um cliente costuma custar menos do que conquistar outro, e por isso prever o cancelamento (\textit{churn}) é um dos usos mais comuns de dados em comércio eletrônico. Bases públicas de churn circulam amplamente em plataformas como o Kaggle e são usadas em cursos e trabalhos acadêmicos, muitas vezes sem verificação da origem ou da qualidade dos dados.
+Prever o cancelamento (\textit{churn}) é um dos usos mais comuns de dados em comércio eletrônico. Bases públicas de churn circulam amplamente em plataformas como o Kaggle e são usadas em cursos e trabalhos acadêmicos, muitas vezes sem verificação da origem ou da qualidade dos dados.
 
-O trabalho responde a três perguntas. Primeiro, a base é confiável e o que precisa ser corrigido antes da análise? Segundo, como os fatores de perfil, engajamento, compras e atrito se relacionam entre si? Terceiro, quais fatores estão associados ao churn, e essa associação é linear?
-
-A contribuição é metodológica. O trabalho mostra como identificar uma base simulada, como valores extremos e variáveis redundantes enganam a análise de correlação e por que modelos lineares podem esconder o fator mais importante. O código completo e interativo está em um notebook público \cite{silva2026churn}.
+O trabalho responde a três perguntas: se a base é confiável e o que precisa ser corrigido antes da análise; como os fatores de perfil, engajamento, compras e atrito se relacionam entre si; e quais fatores estão associados ao churn, e se essa associação é linear. O código completo e interativo está em um notebook público \cite{silva2026churn} (\href{https://github.com/joaogabrielts0611-ai/Trabalho---PSP-8}{GitHub} $\cdot$ \href{https://colab.research.google.com/github/joaogabrielts0611-ai/Trabalho---PSP-8/blob/main/analise_churn_ecommerce.ipynb}{Google Colab}).
 
 % =====================================================================
-\section{Dados e método}
+\section{Revisão de literatura}
 
-\subsection{Base de dados}
+O interesse gerencial pelo churn vem do valor da retenção. \citeonline{reichheld1990} mostraram, em empresas de serviços, que reduzir em 5 pontos percentuais a taxa de perda de clientes pode elevar o lucro em 25\% a 85\%, porque clientes antigos compram mais e custam menos para atender. A partir daí, prever quem vai cancelar virou problema central do marketing analítico.
 
-A base reúne 50.000 clientes de uma loja on-line em 8 países e 40 cidades \cite{srisyra2026}. As 25 variáveis foram agrupadas em quatro blocos: perfil (idade, gênero, país, tempo de cadastro), engajamento (logins, duração da sessão, páginas, app, e-mails, redes sociais, lista de desejos, avaliações), compras (total, ticket médio, recência, descontos, devoluções, meios de pagamento, valor do cliente ou LTV, saldo de crédito) e atrito (abandono de carrinho, ligações ao atendimento). A variável de interesse indica se o cliente cancelou; a taxa geral é de 28,9\%. Não há datas, apenas o trimestre de cadastro, o que faz da base um corte transversal.
+No torneio de modelos de churn analisado por \citeonline{neslin2006}, a escolha do método de estimação mudou de forma relevante a capacidade de previsão, com vantagem para regressão logística e árvores de decisão sobre abordagens mais simples. \citeonline{lemmens2006} mostraram que combinar árvores por \textit{bagging} e \textit{boosting} melhora de forma substancial a previsão de churn em relação a uma árvore única ou à regressão logística, por captar interações e efeitos não lineares. O \textit{gradient boosting} de \citeonline{friedman2001} é a forma mais usada dessa ideia. \citeonline{verbeke2012} acrescentam que, além da precisão, modelos de churn precisam ser compreensíveis para orientar a ação de retenção, o que justifica comparar um modelo interpretável com um mais flexível.
 
-\subsection{Auditoria}
-
-A conferência da base encontrou sinais consistentes de geração sintética (Tabela~\ref{tab:simulada}).
-
-\begin{table}[htbp]
-  \centering
-  \caption{Evidências de que a base é simulada}
-  \label{tab:simulada}
-  \tabelaabnt
-  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{5cm} >{\raggedright\arraybackslash}X}
-    \toprule
-    \textbf{Evidência} & \textbf{O que se observa} \\
-    \midrule
-    Faltantes em proporções redondas & 5,0\%, 6,0\%, 7,0\%, 8,0\%, 10,0\%, 11,0\% e 12,0\% em colunas diferentes \\
-    Geografia artificial & Exatamente 5 cidades por país, sempre as maiores \\
-    Cadastro uniforme & Entre 24,9\% e 25,1\% dos clientes em cada trimestre \\
-    Erros inseridos & Idades de 5, 10, 150 e 200 anos; compras negativas; taxas acima de 100\% (451 clientes no total) \\
-    Contagem com decimais & 22,5\% dos clientes com total de compras fracionário \\
-    Correlações do tipo tudo ou nada & Dos 190 pares, 111 com correlação abaixo de 0,1 em módulo, 78 acima de 0,3 e só 1 entre os dois \\
-    \bottomrule
-  \end{tabularx}
-  \fonte{Elaboração própria a partir de \citeonline{srisyra2026}.}
-\end{table}
-
-A falta de dado não é aleatória em duas variáveis. Clientes sem duração de sessão registrada têm churn de 41,1\%, contra 28,0\% dos demais; sem taxa de abertura de e-mails, 40,7\% contra 28,3\% (qui-quadrado com correção de Benjamini e Hochberg, $p < 0{,}001$). Excluir essas linhas enviesaria a análise \cite{little2019}.
-
-\subsection{Limpeza}
-
-Valores impossíveis (idade fora de 16 a 100 anos, compras negativas, taxas acima de 100\%) foram convertidos em faltantes. Extremos plausíveis, como tickets acima de US\$~1.000, foram mantidos, e por isso as análises usam medidas robustas a eles. Nos modelos, faltantes foram imputados pela mediana com uma variável indicadora de falta.
-
-\subsection{Medidas e modelos}
-
-As correlações entre os 190 pares de variáveis numéricas foram medidas por Pearson e por \citeonline{spearman1904}, que usa a ordem dos valores e resiste a extremos, com correção de \citeonline{benjamini1995} para múltiplas comparações. A estrutura comum foi estimada por componentes principais, e a correlação parcial com o churn foi calculada controlando o primeiro componente. As variáveis categóricas foram avaliadas pelo V de \citeonline{cramer1946}.
-
-Para o churn, compararam-se uma regressão logística com variáveis padronizadas e um modelo de \textit{gradient boosting} \cite{friedman2001}, ambos por validação cruzada estratificada em cinco partes e medidos pela área sob a curva ROC (AUC). A importância das variáveis foi medida por permutação em uma amostra de teste de 25\%.
+Dois cuidados de método completam a revisão. Quando a falta de dado está associada ao resultado, excluir as linhas incompletas enviesa as estimativas \cite{little2019}. E correlações de Pearson são sensíveis a valores extremos, enquanto a correlação por postos de \citeonline{spearman1904} mede associações monotônicas e resiste a eles.
 
 % =====================================================================
-\section{Resultados}
+\section{Metodologia}
 
-\subsection{Correlações entre pares}
+A base reúne 50.000 clientes de uma loja on-line em 8 países e 40 cidades \cite{srisyra2026}, com 25 variáveis em quatro blocos: perfil (idade, gênero, país, tempo de cadastro), engajamento (logins, duração da sessão, páginas, app, e-mails, redes sociais, lista de desejos, avaliações), compras (total, ticket médio, recência, descontos, devoluções, valor do cliente ou LTV, saldo de crédito) e atrito (abandono de carrinho, ligações ao atendimento). Não há datas, o que faz da base um corte transversal.
 
-Valores extremos alteram a correlação de Pearson nos dois sentidos. Entre ticket médio e valor do cliente (LTV), Pearson indica 0,15 e Spearman 0,56: 25 tickets acima de US\$~1.000 achatam a relação linear. Entre total de compras e taxa de devolução ocorre o inverso: Pearson indica 0,28, criado por poucos extremos, e Spearman 0,01. Por isso as análises seguintes usam Spearman na base limpa.
+A auditoria encontrou sinais consistentes de geração sintética: faltantes em proporções redondas exatas (5,0\%, 6,0\%, 7,0\% e outras) em colunas diferentes; exatamente 5 cidades por país; cadastros distribuídos entre 24,9\% e 25,1\% por trimestre; 451 clientes com valores impossíveis inseridos (idades de 5 e 200 anos, compras negativas); e correlações do tipo tudo ou nada, com só 1 dos 190 pares entre 0,1 e 0,3 em módulo. A falta de dado é informativa em duas variáveis: sem duração de sessão registrada, o churn é de 41,1\%, contra 28,0\% dos demais ($p < 0{,}001$).
 
-As variáveis formam um bloco fortemente ligado (Figura~\ref{fig:heatmap}). Os pares mais fortes são total de compras $\times$ LTV ($\rho = 0{,}75$), duração da sessão $\times$ páginas por sessão (0,74) e duração da sessão $\times$ uso do app (0,74). O abandono de carrinho é o espelho negativo desse bloco: $\rho = -0{,}69$ com a duração da sessão. O primeiro componente principal, um fator de engajamento, explica 36,5\% da variância das 20 variáveis, contra cerca de 5\% se elas fossem independentes.
+Por isso, valores impossíveis foram convertidos em faltantes, extremos plausíveis foram mantidos e, nos modelos, faltantes foram imputados pela mediana com uma variável indicadora de falta. As correlações entre os 190 pares foram medidas por Pearson e Spearman, com correção de \citeonline{benjamini1995}; a estrutura comum, por componentes principais; e a correlação parcial com o churn, controlando o primeiro componente. As variáveis categóricas foram avaliadas pelo V de \citeonline{cramer1946}. Para o churn, compararam-se regressão logística e \textit{gradient boosting} por validação cruzada estratificada em cinco partes, medidos pela área sob a curva ROC (AUC), com importância das variáveis por permutação e dependência parcial.
+
+% =====================================================================
+\section{Resultados encontrados}
+
+Valores extremos alteram Pearson nos dois sentidos. Entre ticket médio e LTV, Pearson indica 0,15 e Spearman 0,56: 25 tickets acima de US\$~1.000 achatam a relação linear. Entre total de compras e taxa de devolução ocorre o inverso: 0,28 em Pearson, criado por poucos extremos, e 0,01 em Spearman. As variáveis formam um bloco fortemente ligado (Figura~\ref{fig:heatmap}): total de compras $\times$ LTV ($\rho = 0{,}75$), duração da sessão $\times$ páginas (0,74) e abandono de carrinho como espelho negativo ($\rho = -0{,}69$ com a duração da sessão). O primeiro componente principal, um fator de engajamento, explica 36,5\% da variância, contra cerca de 5\% com variáveis independentes. Já o perfil demográfico quase não se relaciona com o churn: V de Cramér abaixo de 0,02 em país, gênero e trimestre de cadastro.
 
 \begin{figure}[htbp]
   \centering
   \caption{Correlação de Spearman entre as 20 variáveis numéricas, ordenadas por agrupamento hierárquico}
   \label{fig:heatmap}
-  \includegraphics[width=0.92\textwidth]{f1_heatmap}
-  \fonte{Elaboração própria a partir de \citeonline{srisyra2026}. Valores exibidos apenas quando o módulo de $\rho$ é de pelo menos 0,3.}
+  \includegraphics[width=0.72\textwidth]{f1_heatmap}
+  \fonte{Elaboração própria a partir de \citeonline{srisyra2026}. Valores exibidos quando $|\rho| \geq 0{,}3$.}
 \end{figure}
 
-O perfil demográfico praticamente não se relaciona com o churn. Entre países, a taxa vai de 27,3\% a 29,9\%; entre gêneros, de 28,7\% a 31,3\%; e o V de Cramér fica abaixo de 0,02 em país, gênero e trimestre de cadastro.
-
-\subsection{Fatores associados ao churn}
-
-A correlação bruta com o churn é negativa para todas as medidas de engajamento, entre $-0{,}20$ e $-0{,}24$. Controlado o fator de engajamento, porém, essas correlações caem para perto de zero (Figura~\ref{fig:parcial}): as oito variáveis medem a mesma coisa. Os fatores que mantêm associação própria são as ligações ao atendimento, o ticket médio, a recência da última compra e a idade (Tabela~\ref{tab:quintis}).
-
-\begin{figure}[htbp]
-  \centering
-  \caption{Correlação de Spearman com o churn: bruta e parcial (controlado o fator de engajamento)}
-  \label{fig:parcial}
-  \includegraphics[width=0.85\textwidth]{f2_parcial}
-  \fonte{Elaboração própria a partir de \citeonline{srisyra2026}.}
-\end{figure}
+A correlação bruta com o churn é negativa para todas as medidas de engajamento, entre $-0{,}20$ e $-0{,}24$, mas cai para perto de zero quando se controla o fator de engajamento: as oito variáveis medem a mesma coisa. Mantêm associação própria as ligações ao atendimento, a recência da última compra e o LTV (Tabela~\ref{tab:quintis}). O LTV tem correlação bruta quase nula, mas relação em U: 45\% de churn no quintil mais baixo, 17\% no do meio e 38\% no mais alto, padrão que uma correlação linear não enxerga.
 
 \begin{table}[htbp]
   \centering
@@ -202,51 +159,27 @@ A correlação bruta com o churn é negativa para todas as medidas de engajament
     Abertura de e-mails & 50\% & 18\% & $-$0,23 & $-$0,05 \\
     Dias desde a última compra & 22\% & 40\% & +0,14 & +0,14 \\
     Valor do cliente (LTV) & 45\% & 38\% & $-$0,06 & +0,21 \\
-    Anos de cadastro & 28\% & 29\% & 0,00 & 0,00 \\
     \bottomrule
   \end{tabular}
-  \fonte{Elaboração própria. Quintil 1 = 20\% dos clientes com menor valor da variável. Taxa média de churn: 28,9\%.}
+  \fonte{Elaboração própria. Quintil 1 = 20\% dos clientes com menor valor da variável. Parcial = controlado o fator de engajamento.}
 \end{table}
 
-O LTV merece destaque. Sua correlação com o churn é quase nula ($-0{,}06$), mas a relação tem forma de U: 45\% de churn no quintil mais baixo, 17\% no do meio e 38\% no mais alto. Uma correlação, por resumir a relação numa reta, não enxerga esse padrão. Na regressão logística, o coeficiente do LTV ainda muda de sinal (+0,81) quando o total de compras entra no modelo, um efeito de supressão: o LTV passa a medir o valor gasto por compra.
-
-\subsection{Modelos}
-
-O \textit{gradient boosting} teve AUC de 0,927 (desvio-padrão de 0,005 entre as cinco partes da validação cruzada), contra 0,790 (0,004) da regressão logística. A diferença de 0,14 indica que boa parte da relação com o churn é não linear. Na importância por permutação, o LTV e as ligações ao atendimento dominam: embaralhar cada um reduz o AUC em 0,16 e 0,14, respectivamente, contra 0,06 da idade e 0,05 do uso de descontos (Figura~\ref{fig:importancia}).
-
-\begin{figure}[htbp]
-  \centering
-  \caption{Importância das variáveis no modelo de \textit{gradient boosting} (queda no AUC ao embaralhar cada variável)}
-  \label{fig:importancia}
-  \includegraphics[width=0.85\textwidth]{f3_importancia}
-  \fonte{Elaboração própria a partir de \citeonline{srisyra2026}. AUC no conjunto de teste = 0,931. As 12 variáveis mais importantes; barras de erro = desvio-padrão em 5 repetições.}
-\end{figure}
-
-A dependência parcial mostra por que o modelo de árvores vence: os efeitos são degraus, não retas (Figura~\ref{fig:degraus}). O churn previsto salta de 19\% para 43\% entre 5 e 6 ligações ao atendimento e de 21\% para 56\% quando o LTV passa de cerca de US\$~1.800; cai de 47\% para 26\% quando a idade passa de 24 anos e de 35\% para 26\% quando o uso de descontos passa de 30\%. Degraus tão nítidos, em valores redondos, são mais um indício de que o gerador da base definiu o churn por regras de corte. Condicionado às demais variáveis, o LTV tem um único degrau; o U observado na Tabela~\ref{tab:quintis} vem de clientes de LTV baixo que também engajam menos.
+O \textit{gradient boosting} teve AUC de 0,927 (desvio-padrão de 0,005), contra 0,790 (0,004) da regressão logística, em linha com \citeonline{lemmens2006}. Na importância por permutação, embaralhar o LTV reduz o AUC em 0,16 e as ligações ao atendimento, em 0,14, contra 0,06 da idade. Na regressão logística, o coeficiente do LTV ainda muda de sinal quando o total de compras entra no modelo, um efeito de supressão. A dependência parcial mostra por que o modelo de árvores vence: os efeitos são degraus, não retas (Figura~\ref{fig:degraus}). O churn previsto salta de 19\% para 43\% entre 5 e 6 ligações ao atendimento e de 21\% para 56\% quando o LTV passa de cerca de US\$~1.800. Degraus tão nítidos, em valores redondos, indicam que o gerador da base definiu o churn por regras de corte.
 
 \begin{figure}[htbp]
   \centering
   \caption{Dependência parcial: churn previsto ao longo das quatro variáveis mais importantes}
   \label{fig:degraus}
-  \includegraphics[width=0.92\textwidth]{f4_degraus}
+  \includegraphics[width=0.78\textwidth]{f4_degraus}
   \fonte{Elaboração própria a partir de \citeonline{srisyra2026}. Linha pontilhada = taxa média de churn (28,9\%).}
 \end{figure}
 
 % =====================================================================
-\section{Discussão e limitações}
-
-O primeiro resultado é sobre a própria base. Uma auditoria simples, com contagem de faltantes, faixas de valores e distribuição das categorias, bastou para mostrar que os dados são simulados. Bases desse tipo são úteis para ensino, mas conclusões sobre o comportamento de consumidores reais exigiriam dados coletados. A auditoria também revelou que a falta de dado carrega informação: descartar as linhas incompletas teria retirado justamente clientes com mais churn.
-
-O segundo resultado é sobre a leitura de correlações. Oito variáveis de engajamento parecem fatores distintos de retenção quando vistas uma a uma, mas são versões de um mesmo comportamento. Para a gestão, isso significa que acompanhar oito indicadores de engajamento acrescenta pouco a acompanhar um índice que os resuma. Já os sinais de atrito, como ligações ao atendimento e abandono de carrinho, têm associação própria com o churn e apontam para pontos de intervenção no processo de atendimento e de compra.
-
-O terceiro resultado é sobre modelos. A regressão logística é interpretável, mas supõe efeitos lineares e perdeu 0,14 de AUC para o modelo de árvores. O caso do LTV mostra o custo dessa suposição: a variável mais importante do modelo não linear parecia irrelevante na correlação e tinha coeficiente de sinal contraintuitivo na regressão.
-
-Há três limitações principais. A base é simulada, e as relações encontradas refletem as regras do gerador dos dados. Os dados são de corte transversal, sem datas, o que impede saber se a queda de engajamento antecede o cancelamento. E associação não implica causalidade: ligações ao atendimento podem ser sintoma, e não causa, da insatisfação.
-
-% =====================================================================
 \section{Conclusão}
 
-A base analisada é simulada, e reconhecer isso foi o primeiro resultado do trabalho. Nela, o churn de 28,9\% não depende do perfil demográfico, mas de um fator geral de engajamento, de sinais de atrito (ligações ao atendimento e abandono de carrinho) e, de forma não linear, do valor do cliente. Três cuidados de método mudaram as conclusões: usar correlações robustas a extremos, controlar variáveis redundantes e testar modelos não lineares. Sem eles, o fator mais importante do churn, o LTV, teria parecido irrelevante.
+A base analisada é simulada, e reconhecer isso foi o primeiro resultado do trabalho: uma auditoria simples bastou para mostrar, e também revelou que descartar as linhas incompletas teria retirado justamente os clientes com mais churn. Nela, o churn não depende do perfil demográfico, mas de um fator geral de engajamento, de sinais de atrito e, de forma não linear, do valor do cliente. Para a gestão, acompanhar oito indicadores de engajamento acrescenta pouco a acompanhar um índice que os resuma, enquanto ligações ao atendimento e abandono de carrinho apontam pontos de intervenção.
+
+Três cuidados de método mudaram as conclusões: usar correlações robustas a extremos, controlar variáveis redundantes e testar modelos não lineares. Sem eles, o fator mais importante do churn, o LTV, teria parecido irrelevante. As limitações são a natureza simulada da base, o corte transversal, que impede saber se a queda de engajamento antecede o cancelamento, e o fato de associação não implicar causalidade.
 
 % ---------- Referências ----------
 \postextual
